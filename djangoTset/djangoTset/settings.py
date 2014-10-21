@@ -59,7 +59,7 @@ WSGI_APPLICATION = 'djangoTset.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.path.join(BASE_DIR, 'db.mysql'),
+        'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'vbn',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
