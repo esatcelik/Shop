@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u3o=&decsjluw6s5f(t%8ul5sz@9-pw4sj)878=l^nuz97e0b0'
+SECRET_KEY = 'twg^^q^xbkw9tt4vbto+bcpp$#1_l-g8ef9&(&pdd$o$ux!3a$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -36,13 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'shop',
-    'shop.addressmodel',
     'myshop',
 
 )
-SHOP_CART_MODIFIERS = ['myshop.modifiers.Fixed7PercentTaxRate']
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,7 +54,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'myshop.urls'
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
-SITE_ID=1
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
