@@ -28,6 +28,8 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
 # Application definition
 
 INSTALLED_APPS = (
