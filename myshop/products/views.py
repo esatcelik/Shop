@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template.loader import get_template
-from django.template import Context
+from django.shortcuts import render_to_response
+from products.models import Products
 
-def index(request):
-    t = get_template('index.html')
-    html = t.render(Context())
-    return HttpResponse(html)
-# Create your views here.
+def products(request):
+    return render_to_response('products.html',
+                             {'products':Products.objects.all()})
+
+def product(request, product_id=1):
+    return render_to_response('product.html',
+                              {'product':Products.objects.get(id=product_id)})
+
