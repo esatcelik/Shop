@@ -28,7 +28,9 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'products/templates') ]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'products/templates'),
+                 os.path.join(BASE_DIR, 'home/templates') ]
 
 # Application definition
 
@@ -90,6 +92,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (('assets', 'static'))
+STATICFILES_DIRS = (
+    "static",
+)

@@ -9,3 +9,9 @@ class Products(models.Model):
     
     def __unicode__(self):
         return self.name
+
+class Gpu(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
