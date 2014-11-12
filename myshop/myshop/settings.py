@@ -28,9 +28,13 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'products/templates'),
-                 os.path.join(BASE_DIR, 'home/templates') ]
+                 os.path.join(BASE_DIR, 'home/templates'),
+                 os.path.join(BASE_DIR, 'login/templates') ]
 
 # Application definition
 
@@ -44,8 +48,11 @@ INSTALLED_APPS = (
     'myshop',
     'products',
     'home',
+    'login',
 
 )
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,6 +82,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
