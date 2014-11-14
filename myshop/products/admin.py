@@ -1,7 +1,6 @@
 from django.contrib import admin
-from products.models import Products, Bows, Arrows, Accessories
+from products.models import Bows, Arrows, Accessories
 
-admin.site.register(Products)
 admin.site.register(Bows)
 admin.site.register(Arrows)
 admin.site.register(Accessories)

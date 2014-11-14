@@ -1,22 +1,27 @@
 from django.shortcuts import render_to_response
-from products.models import Products, Bows, Arrows, Accessories
+from products.models import Bows, Arrows, Accessories
 
-def products(request):
-    return render_to_response('products.html',
-                             {'products':Products.objects.all()})
-
-def product(request, product_id=1):
-    return render_to_response('product.html',
-                              {'product':Products.objects.get(id=product_id)})
 
 def bows(request):
     return render_to_response('products.html',
-                             {'bows':Bows.objects.all()})
+                             {'products':Bows.objects.all(),'mod':'bows'})
 
 def arrows(request):
     return render_to_response('products.html',
-                             {'arrows':Arrows.objects.all()})
+                             {'products':Arrows.objects.all(),'mod':'arrows'})
 
 def accessories(request):
     return render_to_response('products.html',
-                             {'accessories':Accessories.objects.all()})
+                             {'products':Accessories.objects.all(),'mod':'accessories'})
+
+def bow(request, product_id=1):
+    return render_to_response('product.html',
+                              {'product':Bows.objects.get(id=product_id)})
+    
+def arrow(request, product_id=1):
+    return render_to_response('product.html',
+                              {'product':Arrows.objects.get(id=product_id)})
+    
+def accessory(request, product_id=1):
+    return render_to_response('product.html',
+                              {'product':Accessories.objects.get(id=product_id)})
