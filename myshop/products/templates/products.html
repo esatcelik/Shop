@@ -25,7 +25,7 @@
 </head><!--/head-->
 
 <body>
-{% for product in products %}
+{% for product in arrows %}
 <a href="/products/get/{{product.id}}/">{{product.name}}</a>
 {% endfor %}
 	<header id="header"><!--header-->
@@ -146,11 +146,6 @@
 			</div>
 	</header>
 	
-	<section id="advertisement">
-		<div class="container">
-			<img src="images/shop/advertisement.jpg" alt="" />
-		</div>
-	</section>
 	
 	<section>
 		<div class="container">
@@ -770,8 +765,6 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-Shopper. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
 				</div>
 			</div>
 		</div>
@@ -780,11 +773,11 @@
 	
 
   
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../../static/js/jquery.js"></script>
+	<script src="../../static/js/price-range.js"></script>
+    <script src="../../static/js/jquery.scrollUp.min.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/jquery.prettyPhoto.js"></script>
+    <script src="../../static/js/main.js"></script>
 </body>
 </html>

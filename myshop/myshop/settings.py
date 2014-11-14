@@ -48,7 +48,6 @@ INSTALLED_APPS = (
     'myshop',
     'products',
     'home',
-    'login',
 
 )
 

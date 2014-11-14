@@ -91,9 +91,9 @@
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
-								<li><a href="accounts/logout"><i class="fa fa-lock">{{ user.username }}, logout</i></a></li>
+								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
 								{% else %}
-								<li><a href="accounts/login"><i class="fa fa-lock">login</i></a></li>
+								<li><a href="accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
 								{% endif %}
 							</ul>
 						</div>
@@ -1053,8 +1053,6 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
 				</div>
 			</div>
 		</div>
@@ -1063,11 +1061,11 @@
 	
 
   
-    <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../../static/js/jquery.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.scrollUp.min.js"></script>
+	<script src="../../static/js/price-range.js"></script>
+    <script src="../../static/js/jquery.prettyPhoto.js"></script>
+    <script src="../../static/js/main.js"></script>
 </body>
 </html>
