@@ -37,6 +37,7 @@ MEDIA_URL = '/media/'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'products/templates'),
                  os.path.join(BASE_DIR, 'home/templates'),
+                 os.path.join(BASE_DIR, 'shopcart/templates'),
                  os.path.join(BASE_DIR, 'login/templates') ]
 
 # Application definition
@@ -51,6 +52,7 @@ INSTALLED_APPS = (
     'myshop',
     'products',
     'home',
+    'shopcart',
 
 )
 
