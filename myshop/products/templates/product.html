@@ -306,11 +306,14 @@
 								<span>
 									<span>US ${{ product.price }}</span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>
+							<form action="{% url 'shopcart.views.add' %}" method="post">
+							{% csrf_token %}
+							<input type="text" name="quantity" value="1"/>
+							<input type="hidden" name="mod" value="{{mod}}"/>
+							<input type="hidden" name="p_id" value="{{ product.id }}"/>
+							<input type="text" name="u_id" value="{{ user.id }}"/>
+							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
+							</form>
 								</span>
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
