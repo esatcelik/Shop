@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static, settings
 
 urlpatterns = patterns('',
 
@@ -10,3 +10,6 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name':'login.html'}),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
 )
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
