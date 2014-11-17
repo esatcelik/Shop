@@ -66,7 +66,7 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="{% url 'shopcart.views.show' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
 								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
 								{% else %}
@@ -97,8 +97,7 @@
 								<li class="dropdown"><a href="">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+										<li><a href="{% url 'shopcart.views.show' %}">Cart</a></li> 
                                     </ul>
                                 </li> 
 								<li><a href="contact-us.html">Contact</a></li>
@@ -305,13 +304,12 @@
 								<img src="../../../../static/images/product-details/rating.png" alt="" />
 								<span>
 									<span>US ${{ product.price }}</span>
-									<label>Quantity:</label>
 							<form action="{% url 'shopcart.views.add' %}" method="post">
 							{% csrf_token %}
-							<input type="text" name="quantity" value="1"/>
+							
 							<input type="hidden" name="mod" value="{{mod}}"/>
 							<input type="hidden" name="p_id" value="{{ product.id }}"/>
-							<input type="text" name="u_id" value="{{ user.id }}"/>
+							<input type="hidden" name="u_id" value="{{ user.id }}"/>
 							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
 							</form>
 								</span>

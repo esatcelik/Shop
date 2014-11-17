@@ -5,16 +5,22 @@ from django.template import RequestContext
 
 
 def bows(request):
+    c = {}
+    c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Bows.objects.all(),'mod':'bows','user':request.user})
+                             {'products':Bows.objects.all(),'mod':'bows','user':request.user},RequestContext(request,c))
 
 def arrows(request):
+    c = {}
+    c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Arrows.objects.all(),'mod':'arrows','user':request.user})
+                             {'products':Arrows.objects.all(),'mod':'arrows','user':request.user},RequestContext(request,c))
 
 def accessories(request):
+    c = {}
+    c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Accessories.objects.all(),'mod':'accessories','user':request.user})
+                             {'products':Accessories.objects.all(),'mod':'accessories','user':request.user},RequestContext(request,c))
 
 def bow(request, product_id=1):
     c = {}

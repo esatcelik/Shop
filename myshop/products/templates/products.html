@@ -65,10 +65,8 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="{% url 'shopcart.views.show' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
 								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
 								{% else %}
@@ -99,8 +97,7 @@
 								<li class="dropdown"><a href="" class="active">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+										<li><a href="{% url 'shopcart.views.show' %}">Cart</a></li> 
                                     </ul>
                                 </li> 
 								<li><a href="contact-us.html">Contact</a></li>
@@ -249,8 +246,8 @@
 						<div class="price-range"><!--price-range-->
 							<h2>Price Range</h2>
 							<div class="well">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b>$ 0</b> <b class="pull-right">$ 600</b>
+								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="3000" data-slider-step="5" data-slider-value="[0,3000]" id="sl2" ><br />
+								 <b>$ 0</b> <b class="pull-right">$ 3000</b>
 							</div>
 						</div><!--/price-range-->
 						
@@ -273,7 +270,14 @@
 										<img src="../../media/{{product.image}}">
 										<h2>$56</h2>
 										<p>{{product.name}}</p>
-										<a href="{% url 'shopcart.views.show' %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<form action="{% url 'shopcart.views.add' %}" method="post">
+							{% csrf_token %}
+							
+							<input type="hidden" name="mod" value="{{mod}}"/>
+							<input type="hidden" name="p_id" value="{{ product.id }}"/>
+							<input type="hidden" name="u_id" value="{{ user.id }}"/>
+							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
+							</form>
 									</div>
 									
 								</div>
