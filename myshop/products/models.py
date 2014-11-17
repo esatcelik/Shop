@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 class Bows(models.Model):
     BOW_TYPES = (
-        ('Compounds', 'Compounds'),
-        ('Recurves', 'Recurves'),
-        ('Traditional', 'Traditional'),
+        ('C', 'Compounds'),
+        ('R', 'Recurves'),
+        ('T', 'Traditional'),
     )
     
     name = models.CharField(max_length=100)
@@ -21,9 +21,9 @@ class Bows(models.Model):
 
 class Arrows(models.Model):
     ARR_TYPES = (
-        ('Aluminium', 'Aluminium'),
-        ('Carbon', 'Carbon'),
-        ('Wood', 'Wood'),
+        ('A', 'Aluminium'),
+        ('C', 'Carbon'),
+        ('W', 'Wood'),
     )
     
     name = models.CharField(max_length=100)
@@ -39,9 +39,9 @@ class Arrows(models.Model):
 
 class Accessories(models.Model):
     ACS_TYPES = (
-        ('Bow', 'Bow'),
-        ('Arrow', 'Arrow'),
-        ('General', 'General'),
+        ('B', 'Bow'),
+        ('A', 'Arrow'),
+        ('G', 'General'),
     )
     
     name = models.CharField(max_length=100)

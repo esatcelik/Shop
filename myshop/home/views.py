@@ -5,3 +5,5 @@ from django.template import RequestContext
 def main(request):
     return render_to_response('index.html', RequestContext(request, {'user':request.user}))
 
+def contact(request):
+    return render_to_response('contact.html', RequestContext(request, {'user':request.user}))

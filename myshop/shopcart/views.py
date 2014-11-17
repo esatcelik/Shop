@@ -45,6 +45,15 @@ def add(request):
     return render_to_response('cart.html',
                              {'user':request.user,'bow':bow,'arrow':arrow,'accessories':accessories},RequestContext(request,c))
 
+def delete(request):
+    c = {}
+    c.update(csrf(request))
+    
+    p_id = request.POST.get('p_id', '')
+    dat = Bows.objects.get(id=p_id)
+    return render_to_response('cart.html',
+                             {'user':request.user},RequestContext(request,c))
+
 
 
 def show(request):

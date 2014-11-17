@@ -102,7 +102,7 @@
                                 </li> 
 								
 								
-								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="{% url 'home.views.contact' %}">Contact</a></li>
 							</ul>
 						</div>
 					</div>
@@ -139,8 +139,10 @@
 					{% for a in bow %}
 
 					<tbody>
-					<form action="asd" method="post">
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
 					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
 						<tr>
 							<td class="cart_product">
 							
@@ -162,9 +164,9 @@
 							<td class="cart_quantity">
 							<span class="input-group-btn">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									<a class="cart_quantity_up" id="up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" id="down" href=""> - </a>
 									</span>
 								</div>
 							</td>

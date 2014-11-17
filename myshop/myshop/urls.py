@@ -5,6 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static, set
 urlpatterns = patterns('',
 
     url(r'^$', 'home.views.main'),
+    url(r'^contact$', 'home.views.contact'),
     url(r'^products/',include('products.urls')),
     url(r'^admin/', include(admin.site.urls)),
     (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name':'login.html'}),
