@@ -177,7 +177,107 @@
 							</td>
 							<td class="cart_delete">
 							<span class="input-group-btn">
-								<button type="submit" class="btn btn-warning">X</button>
+								<button type="submit" name="bow1" class="btn btn-warning">X</button>
+								</span>
+							
+							</td>
+						</tr>
+
+						</form>
+					</tbody>
+					{% endfor %}
+					{% for a in arrow %}
+
+					<tbody>
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
+						<tr>
+							<td class="cart_product">
+							
+						
+								<a href=""><img src="../../media/{{a.image}}" alt=""></a>
+							
+							</td>
+							<td class="cart_description">
+							<span class="input-group-btn">
+								<h4><a href="">{{a.name}}</a></h4>
+								<p>Type: {{ a.type }}</p>
+								</span>
+							</td>
+							<td class="cart_price">
+							<span class="input-group-btn">
+								<p>${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_quantity">
+							<span class="input-group-btn">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" id="up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" id="down" href=""> - </a>
+									</span>
+								</div>
+							</td>
+							<td class="cart_total">
+							<span class="input-group-btn">
+								<p class="cart_total_price">${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_delete">
+							<span class="input-group-btn">
+								<button type="submit" name="arrow1" class="btn btn-warning">X</button>
+								</span>
+							
+							</td>
+						</tr>
+
+						</form>
+					</tbody>
+					{% endfor %}
+					{% for a in accessories %}
+
+					<tbody>
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
+						<tr>
+							<td class="cart_product">
+							
+						
+								<a href=""><img src="../../media/{{a.image}}" alt=""></a>
+							
+							</td>
+							<td class="cart_description">
+							<span class="input-group-btn">
+								<h4><a href="">{{a.name}}</a></h4>
+								<p>Type: {{ a.type }}</p>
+								</span>
+							</td>
+							<td class="cart_price">
+							<span class="input-group-btn">
+								<p>${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_quantity">
+							<span class="input-group-btn">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" id="up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" id="down" href=""> - </a>
+									</span>
+								</div>
+							</td>
+							<td class="cart_total">
+							<span class="input-group-btn">
+								<p class="cart_total_price">${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_delete">
+							<span class="input-group-btn">
+								<button type="submit" name="accessory1" class="btn btn-warning">X</button>
 								</span>
 							
 							</td>

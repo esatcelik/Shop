@@ -50,9 +50,26 @@ def delete(request):
     c.update(csrf(request))
     
     p_id = request.POST.get('p_id', '')
-    dat = Bows.objects.get(id=p_id)
+    if 'bow1' in request.POST:
+        dat = Bows.objects.get(id=p_id)
+    if 'arrow1' in request.POST:
+        dat = Arrows.objects.get(id=p_id)
+    if 'accessory1' in request.POST:
+        dat = Accessories.objects.get(id=p_id)
+    dat.delete()  
+    
+    dat = Cart.objects.get(user_id1=request.user.id)
+    d = eval(dat.data)
+    
+    bow = Bows.objects.filter(id__in = d['bows'])  # @UndefinedVariable
+
+    arrow = Arrows.objects.filter(id__in = d['arrows'])  # @UndefinedVariable
+
+    accessories = Accessories.objects.filter(id__in = d['accessories'])  # @UndefinedVariable
+
+    
     return render_to_response('cart.html',
-                             {'user':request.user},RequestContext(request,c))
+                             {'user':request.user,'bow':bow,'arrow':arrow,'accessories':accessories},RequestContext(request,c))
 
 
 
