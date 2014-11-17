@@ -51,13 +51,20 @@ def delete(request):
     
     p_id = request.POST.get('p_id', '')
     if 'bow1' in request.POST:
-        dat = Bows.objects.get(id=p_id)
+        dat = Cart.objects.get(user_id1=request.user.id)
+        d = eval(dat.data)
+        d['bows'].remove(p_id)
     if 'arrow1' in request.POST:
-        dat = Arrows.objects.get(id=p_id)
+        dat = Cart.objects.get(user_id1=request.user.id)
+        d = eval(dat.data)
+        d['arrows'].remove(p_id)
     if 'accessory1' in request.POST:
-        dat = Accessories.objects.get(id=p_id)
-    dat.delete()  
+        dat = Cart.objects.get(user_id1=request.user.id)
+        d = eval(dat.data)
+        d['accessories'].remove(p_id)
     
+    dat.data=str(d)
+    dat.save()
     dat = Cart.objects.get(user_id1=request.user.id)
     d = eval(dat.data)
     
