@@ -22,6 +22,56 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../static/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../static/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../../static/images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../static/js/cart.js"></script>
+    <script type="text/javascript">
+<!--
+{% for a in bow %}
+function bow_up{{a.id}}() {
+var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+}
+{% endfor %}
+{% for a in arrow %}
+function arrow_up{{a.id}}() {
+var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+}
+{% endfor %}
+{% for a in accessories %}
+function accessory_up{{a.id}}() {
+
+var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+}
+{% endfor %}
+
+
+
+
+{% for a in bow %}
+function bow_down{{a.id}}() {
+var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+}
+{% endfor %}
+{% for a in arrow %}
+function arrow_down{{a.id}}() {
+var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+}
+{% endfor %}
+{% for a in accessories %}
+function accessory_down{{a.id}}() {
+
+var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+}
+{% endfor %}
+
+//-->
+</script>
+</head>
 </head><!--/head-->
 
 <body>
@@ -58,7 +108,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="../../static/images/home/logo.png" alt="" /></a>
+							<a href="{% url 'home.views.main' %}"><img src="../../static/images/home/logo.png" alt="" /></a>
 						</div>
 						
 					</div>
@@ -164,9 +214,9 @@
 							<td class="cart_quantity">
 							<span class="input-group-btn">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" id="up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" id="down" href=""> - </a>
+									<a class="cart_quantity_up" onclick="bow_up{{a.id}}()" id="up" name="up"> + </a>
+									<input class="cart_quantity_input" type="text" id="bow_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="bow_down{{a.id}}()" id="down" > - </a>
 									</span>
 								</div>
 							</td>
@@ -214,9 +264,9 @@
 							<td class="cart_quantity">
 							<span class="input-group-btn">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" id="up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" id="down" href=""> - </a>
+									<a class="cart_quantity_up" onclick="arrow_up{{a.id}}()" id="up" > + </a>
+									<input class="cart_quantity_input" type="text" id="arrow_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="arrow_down{{a.id}}()" id="down" > - </a>
 									</span>
 								</div>
 							</td>
@@ -264,9 +314,9 @@
 							<td class="cart_quantity">
 							<span class="input-group-btn">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" id="up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" id="number" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" id="down" href=""> - </a>
+									<a class="cart_quantity_up" onclick="accessory_up{{a.id}}()" id="up"> + </a>
+									<input class="cart_quantity_input" type="text" id="accessory_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="accessory_down{{a.id}}()" id="down"> - </a>
 									</span>
 								</div>
 							</td>
@@ -525,7 +575,6 @@
 		
 	</footer><!--/Footer-->
 	
-
 
     <script src="../../static/js/jquery.js"></script>
 	<script src="../../static/js/bootstrap.min.js"></script>

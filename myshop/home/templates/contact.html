@@ -57,7 +57,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="../../static/images/home/logo.png" alt="" /></a>
+							<a href="{% url 'home.views.main' %}"><img src="../../static/images/home/logo.png" alt="" /></a>
 						</div>
 						
 					</div>
@@ -65,8 +65,12 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="{% url 'shopcart.views.show' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								{% if user.is_authenticated %}
+								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
+								{% else %}
+								<li><a href="accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -88,15 +92,14 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="{% url 'home.views.main' %}">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+										<li><a href="{% url 'shopcart.views.show' %}">Cart</a></li> 
                                     </ul>
                                 </li> 
-								<li><a href="contact-us.html" class="active">Contact</a></li>
+								<li><a href="{% url 'home.views.contact' %}" class="active">Contact</a></li>
 							</ul>
 						</div>
 					</div>

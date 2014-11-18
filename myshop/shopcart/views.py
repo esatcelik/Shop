@@ -3,6 +3,8 @@ from shopcart.models import Cart
 from products.models import Bows, Arrows, Accessories
 from django.template import RequestContext
 from django.core.context_processors import csrf
+from django.shortcuts import redirect
+
 # Create your views here.
 def add(request):
     
@@ -33,17 +35,7 @@ def add(request):
         dat.data=d
         dat.save()
     
-    dat = Cart.objects.get(user_id1=request.user.id)
-    d = eval(dat.data)
-    
-    bow = Bows.objects.filter(id__in = d['bows'])  # @UndefinedVariable
-
-    arrow = Arrows.objects.filter(id__in = d['arrows'])  # @UndefinedVariable
-
-    accessories = Accessories.objects.filter(id__in = d['accessories'])  # @UndefinedVariable
-
-    return render_to_response('cart.html',
-                             {'user':request.user,'bow':bow,'arrow':arrow,'accessories':accessories},RequestContext(request,c))
+    return redirect('shopcart.views.show')
 
 def delete(request):
     c = {}
@@ -65,20 +57,8 @@ def delete(request):
     
     dat.data=str(d)
     dat.save()
-    dat = Cart.objects.get(user_id1=request.user.id)
-    d = eval(dat.data)
     
-    bow = Bows.objects.filter(id__in = d['bows'])  # @UndefinedVariable
-
-    arrow = Arrows.objects.filter(id__in = d['arrows'])  # @UndefinedVariable
-
-    accessories = Accessories.objects.filter(id__in = d['accessories'])  # @UndefinedVariable
-
-    
-    return render_to_response('cart.html',
-                             {'user':request.user,'bow':bow,'arrow':arrow,'accessories':accessories},RequestContext(request,c))
-
-
+    return redirect('shopcart.views.show')
 
 def show(request):
     c = {}
