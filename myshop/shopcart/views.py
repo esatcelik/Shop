@@ -63,14 +63,29 @@ def delete(request):
 def show(request):
     c = {}
     c.update(csrf(request))
-    dat = Cart.objects.get(user_id1=request.user.id)
-    d = eval(dat.data)
+    try:
+        dat = Cart.objects.get(user_id1=request.user.id)
+        d = eval(dat.data)
+    except Cart.DoesNotExist:
+        return render_to_response('cart.html',
+                             {'user':request.user},RequestContext(request,c))
     
-    bow = Bows.objects.filter(id__in = d['bows'])  # @UndefinedVariable
-
-    arrow = Arrows.objects.filter(id__in = d['arrows'])  # @UndefinedVariable
-
-    accessories = Accessories.objects.filter(id__in = d['accessories'])  # @UndefinedVariable
+    
+    
+    try:
+        bow = Bows.objects.filter(id__in = d['bows'])  # @UndefinedVariable
+    except Bows.DoesNotExist:
+        bow = None
+    
+    try:
+        arrow = Arrows.objects.filter(id__in = d['arrows'])  # @UndefinedVariable
+    except Arrows.DoesNotExist:
+        arrow = None
+    
+    try:
+        accessories = Accessories.objects.filter(id__in = d['accessories'])  # @UndefinedVariable
+    except Accessories.DoesNotExist:
+        accessories = None
 
     return render_to_response('cart.html',
                              {'user':request.user,'bow':bow,'arrow':arrow,'accessories':accessories},RequestContext(request,c))

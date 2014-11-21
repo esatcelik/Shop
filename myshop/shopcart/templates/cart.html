@@ -26,24 +26,55 @@
     <script language="JavaScript" type="text/javascript" src="../../static/js/cart.js"></script>
     <script type="text/javascript">
 <!--
+
+var bows = []
+var arrows = []
+var accessories = []
+
 {% for a in bow %}
 function bow_up{{a.id}}() {
-var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
-elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+if (document.getElementById("bow_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	bows.push({{a.id}},[elem{{a.id}}.value])
 }
+else {
+    bows.push({{a.id}},[1])
+}
+
+}
+bow_up{{a.id}}()
 {% endfor %}
+
 {% for a in arrow %}
 function arrow_up{{a.id}}() {
-var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
-elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+if (document.getElementById("arrow_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	arrows.push({{a.id}},[elem{{a.id}}.value])
 }
+else {
+    arrows.push({{a.id}},[1])
+}
+
+}
+arrow_up{{a.id}}()
 {% endfor %}
+
 {% for a in accessories %}
 function accessory_up{{a.id}}() {
-
-var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
-elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+if (document.getElementById("accessory_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	accessories.push({{a.id}},[elem{{a.id}}.value])
 }
+else {
+    accessories.push({{a.id}},[1])
+}
+
+
+}
+accessory_up{{a.id}}()
 {% endfor %}
 
 
@@ -53,12 +84,14 @@ elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
 function bow_down{{a.id}}() {
 var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
 elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+bows.push({{a.id}},[elem{{a.id}}.value])
 }
 {% endfor %}
 {% for a in arrow %}
 function arrow_down{{a.id}}() {
 var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
 elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+arrows.push({{a.id}},[elem{{a.id}}.value])
 }
 {% endfor %}
 {% for a in accessories %}
@@ -66,8 +99,49 @@ function accessory_down{{a.id}}() {
 
 var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
 elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+accessories.push({{a.id}},[elem{{a.id}}.value])
 }
 {% endfor %}
+
+function out() {
+var f = document.createElement("form");
+f.setAttribute('method',"post");
+f.setAttribute('action',"{% url 'checkout.views.out' %}");
+
+var i = document.createElement("input");
+i.type = "hidden";
+i.name = "1";
+i.id = "1";
+i.setAttribute('value',bows);
+f.appendChild(i);
+
+var ii = document.createElement("input");
+ii.type = "hidden";
+ii.name = "2";
+ii.id = "2";
+ii.setAttribute('value',arrows);
+f.appendChild(ii);
+
+var iii = document.createElement("input");
+iii.type = "hidden";
+iii.name = "3";
+iii.id = "3";
+iii.setAttribute('value',accessories);
+f.appendChild(iii);
+
+var us = document.createElement("input");
+us.type = "hidden";
+us.name = "4";
+us.id = "4";
+us.setAttribute('value',{{ user.id }});
+f.appendChild(us);
+
+
+document.body.appendChild(f);
+
+
+f.submit();
+}
 
 //-->
 </script>
@@ -115,7 +189,7 @@ elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{% url 'checkout.views.review' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="{% url 'shopcart.views.show' %}" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
 								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
@@ -411,7 +485,7 @@ elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
 							<li>Total <span>$61</span></li>
 						</ul>
 							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" onclick="out()">Check Out</a>
 					</div>
 				</div>
 			</div>

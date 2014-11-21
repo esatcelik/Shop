@@ -2,25 +2,25 @@ from django.shortcuts import render_to_response
 from products.models import Bows, Arrows, Accessories
 from django.core.context_processors import csrf
 from django.template import RequestContext
-
+from django.db.models import Q
 
 def bows(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Bows.objects.all(),'mod':'bows','user':request.user},RequestContext(request,c))
+                             {'products':Bows.objects.filter(~Q(quantity = 0)),'mod':'bows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
 def arrows(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Arrows.objects.all(),'mod':'arrows','user':request.user},RequestContext(request,c))
+                             {'products':Arrows.objects.filter(~Q(quantity = 0)),'mod':'arrows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
 def accessories(request):
     c = {}
     c.update(csrf(request))
     return render_to_response('products.html',
-                             {'products':Accessories.objects.all(),'mod':'accessories','user':request.user},RequestContext(request,c))
+                             {'products':Accessories.objects.filter(~Q(quantity = 0)),'mod':'accessories','user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
 def bow(request, product_id=1):
     c = {}
