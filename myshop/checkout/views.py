@@ -1,10 +1,11 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
 from products.models import Bows, Arrows, Accessories
-from checkout.models import Check
+from checkout.models import Check, Package
 from shopcart.models import Cart
 from django.shortcuts import redirect
-from django.db import models
+from django.core.context_processors import csrf
+from django.template import RequestContext
 # Create your views here.
 
 
@@ -52,25 +53,79 @@ def out(request):
     b = Cart.objects.get(user_id1=user_id1)
     b.delete()
     
-    a = Check(bow_data=bow, arrow_data=arrow, accessory_data=accessories, user_id1=user_id1, Tprice=total)
+    a = Check(bow_data=bow, arrow_data=arrow, accessory_data=accessories, user_id1=user_id1, Tprice=total, used=0)
     a.save()
+    
+    
+    
+    f = Check.objects.filter(user_id1=request.user.id, used=0)  # @UndefinedVariable
+    
+    for j in f:
+        a1 = 0
+        d = j.Tprice
+        
+        b1 = eval(j.bow_data).values()
+        for i in b1:
+            a1 = a1 + int(i)
+        b1 = eval(j.arrow_data).values()
+        for i in b1:
+            a1 = a1 + int(i)
+        b1 = eval(j.accessory_data).values()
+        for i in b1:
+            a1 = a1 + int(i)
+        j.used=1
+        j.save()
+        g = Package(user_id1=j.user_id1, Tprice=d, quantity=a1, real_id = j.id)
+        g.save()
+    
     
     return redirect('checkout.views.review')
 
 def review(request):
-    
-    f = Check.objects.filter(user_id1=request.user.id)  # @UndefinedVariable
-    #c = {}
-    #for d in f:
-    #    d1 = d.bow_data
-    #    d1 = eval(d1)
-    #    for key,val in d1:
-    #       a = Bows.objects.get(id=d[key])
-    #       a.name
-   
-    
-    
-    
-    
+    c = {}
+    c.update(csrf(request))
+    f = Package.objects.filter(user_id1=request.user.id)  # @UndefinedVariable
+
     return render_to_response('checkout.html',
-                             {'user':request.user, 'data':f})
+                             {'user':request.user, 'data':f},RequestContext(request,c))
+
+def delete(request):
+    c = {}
+    c.update(csrf(request))
+    
+    l = request.POST.get('c_id', '')
+    l2 = request.POST.get('pac_id', '')
+    
+    f1 = Package.objects.get(id=l2)
+    f1.delete()
+
+    f = Check.objects.get(id=l)
+    
+    a= eval(f.arrow_data)
+    
+    d= a.keys()
+    for i in d:
+        r = Arrows.objects.get(id = int(i))
+        r.quantity = r.quantity + int(a[i])
+        r.save()
+    
+    a= eval(f.bow_data)
+    
+    d= a.keys()
+    for i in d:
+        r = Bows.objects.get(id = int(i))
+        r.quantity = r.quantity + int(a[i])
+        r.save()
+    
+    a= eval(f.accessory_data)
+    
+    d= a.keys()
+    for i in d:
+        r = Accessories.objects.get(id = int(i))
+        r.quantity = r.quantity + int(a[i])
+        r.save()
+    
+    
+    
+    
+    return redirect('checkout.views.review')

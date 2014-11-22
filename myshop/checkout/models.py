@@ -8,6 +8,16 @@ class Check(models.Model):
     arrow_data=models.CharField(max_length=500,blank=True)
     accessory_data=models.CharField(max_length=500,blank=True)
     Tprice = models.IntegerField()
+    used = models.IntegerField()
     
     def __unicode__(self):
-        return self.user_id1    
+        return self.user_id1
+
+class Package(models.Model):
+    user_id1=models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    Tprice = models.IntegerField()
+    real_id = models.IntegerField()
+    
+    def __unicode__(self):
+        return self.user_id1
