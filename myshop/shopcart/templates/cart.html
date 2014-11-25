@@ -192,9 +192,9 @@ f.submit();
 								<li><a href="{% url 'checkout.views.review' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="{% url 'shopcart.views.show' %}" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}
-								<li><a href="accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
+								<li><a href="../../accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
 								{% else %}
-								<li><a href="accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
+								<li><a href="../../accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
 								{% endif %}
 							</ul>
 						</div>
