@@ -22,6 +22,25 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../static/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../static/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../../static/images/ico/apple-touch-icon-57-precomposed.png">
+    <style>
+      #map-canvas {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      function initialize() {
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+          center: new google.maps.LatLng(41.060048, 28.987478),
+          zoom: 17,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head><!--/head-->
 
 <body>
@@ -118,11 +137,13 @@
 	    	<div class="row">    		
 	    		<div class="col-sm-12">    			   			
 					<h2 class="title text-center">Contact <strong>Us</strong></h2>    			    				    				
-					<div id="gmap" class="contact-map">
+					<div id="map-canvas"></div>
+					
 					</div>
 				</div>			 		
 			</div>    	
     		<div class="row">  	
+    		</br></br>
 	    		<div class="col-sm-8">
 	    			<div class="contact-form">
 	    				<h2 class="title text-center">Get In Touch</h2>
@@ -150,12 +171,12 @@
 	    			<div class="contact-info">
 	    				<h2 class="title text-center">Contact Info</h2>
 	    				<address>
-	    					<p>E-Shopper Inc.</p>
-							<p>935 W. Webster Ave New Streets Chicago, IL 60614, NY</p>
-							<p>Newyork USA</p>
+	    					<p>Shop-Archery Inc.</p>
+							<p>Halaskargazi Cd No:208, Merkez Mh., Şişli, Turkey</p>
+							<p>Istanbul Turkey</p>
 							<p>Mobile: +2346 17 38 93</p>
 							<p>Fax: 1-714-252-0026</p>
-							<p>Email: info@e-shopper.com</p>
+							<p>Email: info@shoparchery.com</p>
 	    				</address>
 	    				<div class="social-networks">
 	    					<h2 class="title text-center">Social Networking</h2>
@@ -191,65 +212,9 @@
 						</div>
 					</div>
 					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="../../static/images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
 						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="../../static/images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
 						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="../../static/images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
 						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="../../static/images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
