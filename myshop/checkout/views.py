@@ -124,8 +124,5 @@ def delete(request):
         r = Accessories.objects.get(id = int(i))
         r.quantity = r.quantity + int(a[i])
         r.save()
-    
-    
-    
-    
+  
     return redirect('checkout.views.review')
