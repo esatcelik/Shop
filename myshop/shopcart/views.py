@@ -6,14 +6,61 @@ from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
 
-def rec_cal():
+def rec_cal(user_id2):
     
-    return  0
+    sim = {}
+    for user in Rec.objects.all():
+        if user.user1_id != int(user_id2):  # @UndefinedVariable
+            continue
+        
+        b = Rec.objects.get(user1_id=user.user1_id)
+        d = {}
+        
+        a = Rec.objects.get(user1_id=int(user_id2))  # @UndefinedVariable
+        
+        a1 = eval(a.rec_bow)  # @UndefinedVariable
+        b1 = eval(b.rec_bow)  # @UndefinedVariable
+        
+        sub_b = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
+        if len(sub_b) == 0:  # @UndefinedVariable
+            continue
+        s = len(a1)/len(sub_b)  # @UndefinedVariable
+        
+        sim[user.user1_id] = s
+        
+        #d['bow'] = sub(sub)  # @UndefinedVariable
+        
+        
+        
+        
+        a1 = eval(a.rec_arrow)  # @UndefinedVariable
+        b1 = eval(b.rec_arrow)  # @UndefinedVariable
+        
+        sub_a = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
+        if len(sub_a) == 0:  # @UndefinedVariable
+            continue
+        s = len(a1)/len(sub_a)  # @UndefinedVariable
+        sim[user.user1_id] = sim[user.user1_id]*s
+        #d['arrow'] = sub(sub)  # @UndefinedVariable
+        
+        
+        
+        
+        a1 = eval(a.rec_accessory)  # @UndefinedVariable
+        b1 = eval(b.rec_accessory)  # @UndefinedVariable
+        
+        sub_ac = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
+        if len(sub_ac) == 0:  # @UndefinedVariable
+            continue
+        s = len(a1)/len(sub_ac)  # @UndefinedVariable
+        sim[user.user1_id] = sim[user.user1_id]*s
+        #d['accessory'] = sub(sub)  # @UndefinedVariable
+        
+    return sim
+    
 
 def add(request):
-    
-    
-    
+
     c = {}
     c.update(csrf(request))
     
@@ -66,6 +113,8 @@ def add(request):
         d=str(d)  # @UndefinedVariable
         dat.data=d
         dat.save()
+    
+    print rec_cal(user_id2)
     
     return redirect('shopcart.views.show')
 
