@@ -9,13 +9,18 @@ def bows(request):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
     
-    if (low_range not in request.POST) & (upp_range not in request.POST):
-        low_range=0
-        upp_range=9999999
-    else:
+    if low_range == "":
+        low_range = 0
+    if upp_range == "":
+        upp_range = 9999999
+    
+    if request.POST:
         low_range = int(low_range)
         upp_range = int(upp_range)
-    
+    else:
+        low_range=0
+        upp_range=9999999
+
     c = {}
     c.update(csrf(request))
     return render_to_response('products.html',
@@ -25,12 +30,17 @@ def arrows(request):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
     
-    if (low_range not in request.POST) & (upp_range not in request.POST):
-        low_range=0
-        upp_range=9999999
-    else:
+    if low_range == "":
+        low_range = 0
+    if upp_range == "":
+        upp_range = 9999999
+    
+    if request.POST:
         low_range = int(low_range)
         upp_range = int(upp_range)
+    else:
+        low_range=0
+        upp_range=9999999
     
     c = {}
     c.update(csrf(request))
@@ -41,12 +51,17 @@ def accessories(request):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
     
-    if (low_range not in request.POST) & (upp_range not in request.POST):
-        low_range=0
-        upp_range=9999999
-    else:
+    if low_range == "":
+        low_range = 0
+    if upp_range == "":
+        upp_range = 9999999
+    
+    if request.POST:
         low_range = int(low_range)
         upp_range = int(upp_range)
+    else:
+        low_range=0
+        upp_range=9999999
     
     c = {}
     c.update(csrf(request))
