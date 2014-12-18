@@ -15,8 +15,8 @@ def bows(request):
         upp_range = 9999999
     
     if request.POST:
-        low_range = int(low_range)
-        upp_range = int(upp_range)
+        low_range = int(low_range)  # @UndefinedVariable
+        upp_range = int(upp_range)  # @UndefinedVariable
     else:
         low_range=0
         upp_range=9999999
@@ -36,8 +36,8 @@ def arrows(request):
         upp_range = 9999999
     
     if request.POST:
-        low_range = int(low_range)
-        upp_range = int(upp_range)
+        low_range = int(low_range)  # @UndefinedVariable
+        upp_range = int(upp_range)  # @UndefinedVariable
     else:
         low_range=0
         upp_range=9999999
@@ -57,8 +57,8 @@ def accessories(request):
         upp_range = 9999999
     
     if request.POST:
-        low_range = int(low_range)
-        upp_range = int(upp_range)
+        low_range = int(low_range)  # @UndefinedVariable
+        upp_range = int(upp_range)  # @UndefinedVariable
     else:
         low_range=0
         upp_range=9999999

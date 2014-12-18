@@ -139,6 +139,7 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
+						<td class="image"></td>
 							<td class="image">User</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
@@ -146,6 +147,10 @@
 						</tr>
 					</thead>
 					<tbody>
+							<td class="">
+								<p class="cart_total_price">&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../static/images/home/truck.png" height="42" width="42" alt="" /></p>
+							</td>
+							
 							<td class="cart_product">
 								<p class="cart_total_price">{{user.username}}</p>
 							</td>
@@ -159,7 +164,9 @@
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">${{a.Tprice}}</p>
+								<p class="cart_total_price">${{a.Tprice}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 							</td>
 							<td class="cart_delete">
 								<button type="submit" name="1" class="btn btn-warning">X</button>
