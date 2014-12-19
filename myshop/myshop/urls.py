@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static, settings
 
+
 urlpatterns = patterns('',
 
     url(r'^$', 'home.views.main'),
@@ -12,6 +13,7 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     url(r'^cart/',include('shopcart.urls')),
     url(r'^check/',include('checkout.urls')),
+    url(r'^signup$', 'home.views.signup'),
 )
 
 urlpatterns += staticfiles_urlpatterns()
