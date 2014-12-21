@@ -8,53 +8,6 @@ from django.core.context_processors import csrf
 from django.shortcuts import redirect
 
 
-
-
-def rec_cal(user_id2):
-    
-    sim = {}
-    for user in Rec.objects.all():
-        if user.user1_id == int(user_id2):  # @UndefinedVariable
-            continue
-        
-        b = Rec.objects.get(user1_id=user.user1_id)
-        
-        a = Rec.objects.get(user1_id=int(user_id2))  # @UndefinedVariable
-        
-        a1 = eval(a.rec_bow)  # @UndefinedVariable
-        b1 = eval(b.rec_bow)  # @UndefinedVariable
-        
-        sub_b = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
-        if len(sub_b) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_b)  # @UndefinedVariable
-        print user.user1_id
-        sim[user.user1_id] = s
-        
-
-        
-        a1 = eval(a.rec_arrow)  # @UndefinedVariable
-        b1 = eval(b.rec_arrow)  # @UndefinedVariable
-        
-        sub_a = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
-        if len(sub_a) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_a)  # @UndefinedVariable
-        sim[user.user1_id] = sim[user.user1_id]*s
-
-        
-        a1 = eval(a.rec_accessory)  # @UndefinedVariable
-        b1 = eval(b.rec_accessory)  # @UndefinedVariable
-        
-        sub_ac = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
-        if len(sub_ac) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_ac)  # @UndefinedVariable
-        sim[user.user1_id] = sim[user.user1_id]*s
-        
-    return sim
-    
-
 def add(request):
 
     c = {}

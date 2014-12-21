@@ -12,8 +12,8 @@ def rec_cal(user_id2):
     sim = {}
     for user in Rec.objects.all():
         if user.user1_id == int(user_id2):  # @UndefinedVariable
-            continue
-        
+            pass
+        sim[user.user1_id] = 1
         
         try:
             a = Rec.objects.get(user1_id=user.user1_id)
@@ -35,9 +35,10 @@ def rec_cal(user_id2):
         
         sub_b = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
         if len(sub_b) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_b)  # @UndefinedVariable
-        sim[user.user1_id] = s
+            pass
+        else:
+            s = len(a1)/len(sub_b)  # @UndefinedVariable
+            sim[user.user1_id] = s
         
         try:
             a = Rec.objects.get(user1_id=user.user1_id)
@@ -56,9 +57,10 @@ def rec_cal(user_id2):
         
         sub_a = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
         if len(sub_a) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_a)  # @UndefinedVariable
-        sim[user.user1_id] = sim[user.user1_id]*s
+            pass
+        else:
+            s = len(a1)/len(sub_a)  # @UndefinedVariable
+            sim[user.user1_id] = sim[user.user1_id]*s
 
         try:
             a = Rec.objects.get(user1_id=user.user1_id)
@@ -77,11 +79,13 @@ def rec_cal(user_id2):
                 
         sub_ac = list(set(a1)-set(b1))  # @UnusedVariable @UndefinedVariable
         if len(sub_ac) == 0:  # @UndefinedVariable
-            continue
-        s = len(a1)/len(sub_ac)  # @UndefinedVariable
-        sim[user.user1_id] = sim[user.user1_id]*s
-
+            pass
+        else:
+            s = len(a1)/len(sub_ac)  # @UndefinedVariable
+            sim[user.user1_id] = sim[(user.user1_id)]*s
+        
     x = sim
+    
     
     sorted_x = sorted(x.items(), key=operator.itemgetter(1))
     
