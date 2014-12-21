@@ -1,3 +1,4 @@
+from __future__ import division
 from django.shortcuts import render_to_response
 from shopcart.models import Cart
 from products.models import Bows, Arrows, Accessories
@@ -6,15 +7,17 @@ from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
 
+
+
+
 def rec_cal(user_id2):
     
     sim = {}
     for user in Rec.objects.all():
-        if user.user1_id != int(user_id2):  # @UndefinedVariable
+        if user.user1_id == int(user_id2):  # @UndefinedVariable
             continue
         
         b = Rec.objects.get(user1_id=user.user1_id)
-        d = {}
         
         a = Rec.objects.get(user1_id=int(user_id2))  # @UndefinedVariable
         
@@ -25,13 +28,10 @@ def rec_cal(user_id2):
         if len(sub_b) == 0:  # @UndefinedVariable
             continue
         s = len(a1)/len(sub_b)  # @UndefinedVariable
-        
+        print user.user1_id
         sim[user.user1_id] = s
         
-        #d['bow'] = sub(sub)  # @UndefinedVariable
-        
-        
-        
+
         
         a1 = eval(a.rec_arrow)  # @UndefinedVariable
         b1 = eval(b.rec_arrow)  # @UndefinedVariable
@@ -41,10 +41,7 @@ def rec_cal(user_id2):
             continue
         s = len(a1)/len(sub_a)  # @UndefinedVariable
         sim[user.user1_id] = sim[user.user1_id]*s
-        #d['arrow'] = sub(sub)  # @UndefinedVariable
-        
-        
-        
+
         
         a1 = eval(a.rec_accessory)  # @UndefinedVariable
         b1 = eval(b.rec_accessory)  # @UndefinedVariable
@@ -54,7 +51,6 @@ def rec_cal(user_id2):
             continue
         s = len(a1)/len(sub_ac)  # @UndefinedVariable
         sim[user.user1_id] = sim[user.user1_id]*s
-        #d['accessory'] = sub(sub)  # @UndefinedVariable
         
     return sim
     
@@ -69,7 +65,7 @@ def add(request):
     product_id2 = request.POST.get('p_id', '')
     
     if not Rec.objects.filter(user1_id=user_id2).exists():  # @UndefinedVariable
-        print "a"
+
         a=Rec(user1_id=user_id2,rec_bow=str([]),rec_arrow=str([]),rec_accessory=str([]))  # @UndefinedVariable
         a.save()
 
@@ -113,8 +109,6 @@ def add(request):
         d=str(d)  # @UndefinedVariable
         dat.data=d
         dat.save()
-    
-    print rec_cal(user_id2)
     
     return redirect('shopcart.views.show')
 
