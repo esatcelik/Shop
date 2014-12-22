@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-    url(r'^bows/(?P<type>.+)/$','products.views.bows'),
-    url(r'^arrows/(?P<type>.+)/$','products.views.arrows'),
-    url(r'^accessories/(?P<type>.+)/$','products.views.accessories'),
+    url(r'^bows/sub/(?P<type>.+)/$','products.views.bows'),
+    url(r'^arrows/sub/(?P<type>.+)/$','products.views.arrows'),
+    url(r'^accessories/sub/(?P<type>.+)/$','products.views.accessories'),
     
     url(r'^bows/$','products.views.bows'),
     url(r'^arrows/$','products.views.arrows'),

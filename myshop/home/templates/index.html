@@ -199,9 +199,9 @@
 								<div id="sportswear" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="/products/bows/c">Compounds</a></li>
-											<li><a href="/products/bows/r">Recurves</a></li>
-											<li><a href="/products/bows/t">Traditional</a></li>
+											<li><a href="/products/bows/sub/c">Compounds</a></li>
+											<li><a href="/products/bows/sub/r">Recurves</a></li>
+											<li><a href="/products/bows/sub/t">Traditional</a></li>
 										</ul>
 									</div>
 								</div>
@@ -218,9 +218,9 @@
 								<div id="mens" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="/products/arrows/a">Aluminium</a></li>
-											<li><a href="/products/arrows/c">Carbon</a></li>
-											<li><a href="/products/arrows/w">Wood</a></li>
+											<li><a href="/products/arrows/sub/a">Aluminium</a></li>
+											<li><a href="/products/arrows/sub/c">Carbon</a></li>
+											<li><a href="/products/arrows/sub/w">Wood</a></li>
 										</ul>
 									</div>
 								</div>
@@ -238,9 +238,9 @@
 								<div id="womens" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="/products/accessories/b">Bow Accessories</a></li>
-											<li><a href="/products/accessories/a">Arrow Accessories</a></li>
-											<li><a href="/products/accessories/g">General Accessories</a></li>
+											<li><a href="/products/accessories/sub/b">Bow Accessories</a></li>
+											<li><a href="/products/accessories/sub/a">Arrow Accessories</a></li>
+											<li><a href="/products/accessories/sub/g">General Accessories</a></li>
 										</ul>
 									</div>
 								</div>
@@ -387,6 +387,7 @@
 							
 							<div class="tab-pane fade" id="sunglass" >
 							{% for accessory in accessories %}
+							<a href="/products/accessories/get/{{accessory.id}}/">
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
 										<div class="single-products">
@@ -401,7 +402,7 @@
 									</div>
 								</div>
 								{% endfor %}
-								
+								</a>
 							</div>
 							
 							

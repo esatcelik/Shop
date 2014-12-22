@@ -30,7 +30,7 @@ def bows(request, type=None):
         up = ""
     else:
         a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../"
+        up = "../../"
     
     
     
@@ -61,7 +61,7 @@ def arrows(request, type=None):
         up = ""
     else:
         a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../"
+        up = "../../"
         
     return render_to_response('products.html',
                              {'products':a,'up':up,'mod':'arrows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
@@ -90,7 +90,7 @@ def accessories(request, type=None):
         up = ""
     else:
         a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../"
+        up = "../../"
 
 
     return render_to_response('products.html',
