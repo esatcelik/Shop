@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.db.models import Q
 from reviews.models import Reviews
 
-def bows(request):
+def bows(request, type=None):
     
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
@@ -24,10 +24,20 @@ def bows(request):
 
     c = {}
     c.update(csrf(request))
+    
+    if type==None:
+        a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+        up = ""
+    else:
+        a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+        up = "../"
+    
+    
+    
     return render_to_response('products.html',
-                             {'products':Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))),'mod':'bows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
+                             {'products':a,'mod':'bows','up':up,'user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
-def arrows(request):
+def arrows(request, type=None):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
     
@@ -45,10 +55,18 @@ def arrows(request):
     
     c = {}
     c.update(csrf(request))
+    
+    if type==None:
+        a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+        up = ""
+    else:
+        a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+        up = "../"
+        
     return render_to_response('products.html',
-                             {'products':Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))),'mod':'arrows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
+                             {'products':a,'up':up,'mod':'arrows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
-def accessories(request):
+def accessories(request, type=None):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
     
@@ -66,8 +84,17 @@ def accessories(request):
     
     c = {}
     c.update(csrf(request))
+
+    if type==None:
+        a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+        up = ""
+    else:
+        a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+        up = "../"
+
+
     return render_to_response('products.html',
-                             {'products':Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))),'mod':'accessories','user':request.user},RequestContext(request,c))  # @UndefinedVariable
+                             {'products':a,'up':up,'mod':'accessories','user':request.user},RequestContext(request,c))  # @UndefinedVariable
 
 def bow(request, product_id=1):
     c = {}
@@ -81,7 +108,7 @@ def bow(request, product_id=1):
 def arrow(request, product_id=1):
     c = {}
     c.update(csrf(request))
-    
+     
     rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='arrows'))  # @UndefinedVariable
     
     return render_to_response('product.html',
