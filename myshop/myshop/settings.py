@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'shopcart',
     'checkout',
     'recommendation',
+    'reviews',
 
 )
 

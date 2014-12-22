@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^cart/',include('shopcart.urls')),
     url(r'^check/',include('checkout.urls')),
     url(r'^signup$', 'home.views.signup'),
+    url(r'^reviews', 'reviews.views.add'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

@@ -3,6 +3,7 @@ from products.models import Bows, Arrows, Accessories
 from django.core.context_processors import csrf
 from django.template import RequestContext
 from django.db.models import Q
+from reviews.models import Reviews
 
 def bows(request):
     
@@ -71,17 +72,26 @@ def accessories(request):
 def bow(request, product_id=1):
     c = {}
     c.update(csrf(request))
+    
+    rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='bows'))  # @UndefinedVariable
+    
     return render_to_response('product.html',
-                              {'product':Bows.objects.get(id=product_id),'mod':'bows','user':request.user},RequestContext(request,c))
+                              {'product':Bows.objects.get(id=product_id),'reviews':rev,'mod':'bows','user':request.user},RequestContext(request,c))
     
 def arrow(request, product_id=1):
     c = {}
     c.update(csrf(request))
+    
+    rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='arrows'))  # @UndefinedVariable
+    
     return render_to_response('product.html',
-                              {'product':Arrows.objects.get(id=product_id),'mod':'arrows','user':request.user},RequestContext(request,c))
+                              {'product':Arrows.objects.get(id=product_id),'reviews':rev,'mod':'arrows','user':request.user},RequestContext(request,c))
     
 def accessory(request, product_id=1):
     c = {}
     c.update(csrf(request))
+    
+    rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='accessories'))  # @UndefinedVariable
+    
     return render_to_response('product.html',
-                              {'product':Accessories.objects.get(id=product_id),'mod':'accessories','user':request.user},RequestContext(request,c))
+                              {'product':Accessories.objects.get(id=product_id),'reviews':rev,'mod':'accessories','user':request.user},RequestContext(request,c))
