@@ -348,6 +348,7 @@
 						<div class="tab-content">
 							<div class="tab-pane fade active in" id="tshirt" >
 							{% for bow in bows %}
+							<a href="/products/bows/get/{{bow.id}}/">
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
 										<div class="single-products">
@@ -355,7 +356,14 @@
 												<img src="media/{{bow.image}}" alt="" />
 												<h2>${{bow.price}}</h2>
 												<p>{{bow.name}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+							<form action="{% url 'shopcart.views.add' %}" method="post">
+							{% csrf_token %}
+							
+							<input type="hidden" name="mod" value="bows"/>
+							<input type="hidden" name="p_id" value="{{ bow.id }}"/>
+							<input type="hidden" name="u_id" value="{{ user.id }}"/>
+							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
+							</form>
 											</div>
 											
 										</div>
@@ -364,10 +372,12 @@
 								
 								
 								{% endfor %}
+								</a>
 							</div>
 							
 							<div class="tab-pane fade" id="blazers" >
 							{% for arrow in arrows %}
+							<a href="/products/arrows/get/{{arrow.id}}/">
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
 										<div class="single-products">
@@ -375,7 +385,14 @@
 												<img src="media/{{arrow.image}}" alt="" />
 												<h2>${{arrow.price}}</h2>
 												<p>{{arrow.name}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+							<form action="{% url 'shopcart.views.add' %}" method="post">
+							{% csrf_token %}
+							
+							<input type="hidden" name="mod" value="arrows"/>
+							<input type="hidden" name="p_id" value="{{ arrow.id }}"/>
+							<input type="hidden" name="u_id" value="{{ user.id }}"/>
+							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
+							</form>
 											</div>
 											
 										</div>
@@ -383,6 +400,7 @@
 								</div>
 								
 								{% endfor %}
+								</a>
 							</div>
 							
 							<div class="tab-pane fade" id="sunglass" >
@@ -395,7 +413,14 @@
 												<img src="media/{{accessory.image}}" alt="" />
 												<h2>${{accessory.price}}</h2>
 												<p>{{accessory.name}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+							<form action="{% url 'shopcart.views.add' %}" method="post">
+							{% csrf_token %}
+							
+							<input type="hidden" name="mod" value="accessories"/>
+							<input type="hidden" name="p_id" value="{{ accessory.id }}"/>
+							<input type="hidden" name="u_id" value="{{ user.id }}"/>
+							<button type="submit" class="btn btn-fefault cart">Add to cart</button>
+							</form>
 											</div>
 											
 										</div>
