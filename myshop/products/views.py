@@ -100,14 +100,21 @@ def bow(request, product_id=1):
     c = {}
     c.update(csrf(request))
     
+    b = Bows.objects.order_by('-pk')[:4]  # @UndefinedVariable
+    ar = Arrows.objects.order_by('-pk')[:4]  # @UndefinedVariable
+    ac = Accessories.objects.order_by('-pk')[:4]  # @UndefinedVariable
+
+    
     rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='bows'))  # @UndefinedVariable
     
     return render_to_response('product.html',
-                              {'product':Bows.objects.get(id=product_id),'reviews':rev,'mod':'bows','user':request.user},RequestContext(request,c))
+                              {'product':Bows.objects.get(id=product_id),'b':b,'ar':ar,'ac':ac,'reviews':rev,'mod':'bows','user':request.user},RequestContext(request,c))
     
 def arrow(request, product_id=1):
     c = {}
     c.update(csrf(request))
+    
+    
      
     rev = Reviews.objects.filter(Q(pro_id=product_id) & Q(mod='arrows'))  # @UndefinedVariable
     
