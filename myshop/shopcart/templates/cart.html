@@ -189,6 +189,10 @@ f.submit();
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+								{% if user.username == "esad" %}
+								<li><a href="{% url 'checkout.views.review2' %}"><i class="fa fa-crosshairs"> Orders</i></a></li>
+								{% endif %}
+
 								<li><a href="{% url 'checkout.views.review' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="{% url 'shopcart.views.show' %}" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								{% if user.is_authenticated %}

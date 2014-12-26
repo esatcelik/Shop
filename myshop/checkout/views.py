@@ -10,17 +10,17 @@ from django.template import RequestContext
 
 
 def clean(a):
-    l=[]
-    for i in a:
-        if i == ",":
-            pass
-        else:
-            l.append(i)
-    l=''.join(l)
     d={}
-    for i in range(1,len(l),2):
-        d[l[i-1]]=l[i]
+    a=a.split(',')
+    for i in range(len(a)):
+        if i == len(a)-1:
+            break
+        if i % 2 == 0:
+            d[a[i]]=a[i+1]
+        else:
+            pass
     return d
+
 
 @csrf_exempt
 def out(request):
@@ -29,23 +29,31 @@ def out(request):
     accessories = request.POST.get('3', '')
     user_id1 = request.POST.get('4', '')
     total = 0
+    print bow
+    print arrow
+    print accessories
+    
     bow = clean(bow)
+    print bow
+
     for i in bow.keys():
-        bowObj= Bows.objects.get(id__in = i)
+
+        bowObj= Bows.objects.get(id = i)
+
         bowObj.quantity = bowObj.quantity - int(bow[i])
         bowObj.save()
         total = total + (int(bow[i]) * bowObj.price)
         
     arrow = clean(arrow)
     for i in arrow.keys():
-        arrowObj= Arrows.objects.get(id__in = i)
+        arrowObj= Arrows.objects.get(id = i)
         arrowObj.quantity = arrowObj.quantity - int(arrow[i])
         arrowObj.save()
         total = total + (int(arrow[i]) * arrowObj.price)
     
     accessories = clean(accessories)
     for i in accessories.keys():
-        accessoriesObj= Accessories.objects.get(id__in = i)
+        accessoriesObj= Accessories.objects.get(id = i)
         accessoriesObj.quantity = accessoriesObj.quantity - int(accessories[i])
         accessoriesObj.save()
         total = total + (int(accessories[i]) * accessoriesObj.price)
@@ -88,6 +96,18 @@ def review(request):
 
     return render_to_response('checkout.html',
                              {'user':request.user, 'data':f},RequestContext(request,c))
+
+def review2(request):
+    c = {}
+    c.update(csrf(request))
+    
+    f = Package.objects.all()
+
+    return render_to_response('checkout2.html',
+                             {'user':request.user, 'data':f},RequestContext(request,c))
+
+
+
 
 def delete(request):
     c = {}
