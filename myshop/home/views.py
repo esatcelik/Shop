@@ -151,7 +151,7 @@ def main(request):
     
     try:
         try:
-            bow = Bows.objects.filter(id__in=d['bow'])  # @UndefinedVariable
+            bow = Bows.objects.filter(id__in=d['bow'])[:3]  # @UndefinedVariable
          
         except Bows.DoesNotExist:
             bow = None
@@ -160,7 +160,7 @@ def main(request):
     
     try:
         try:
-            arrow = Arrows.objects.filter(id__in=d['arrow'])  # @UndefinedVariable
+            arrow = Arrows.objects.filter(id__in=d['arrow'])[:3]  # @UndefinedVariable
          
         except Arrows.DoesNotExist:
             arrow = None
@@ -169,7 +169,7 @@ def main(request):
 
     try:
         try:
-            accessory = Accessories.objects.filter(id__in=d['accessory'])  # @UndefinedVariable
+            accessory = Accessories.objects.filter(id__in=d['accessory'])[:3]  # @UndefinedVariable
          
         except Accessories.DoesNotExist:
             accessory = None

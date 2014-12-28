@@ -9,6 +9,7 @@ def bows(request, type=None):
     
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
+    ord = request.POST.get('ord', '')
     
     if low_range == "":
         low_range = 0
@@ -22,15 +23,30 @@ def bows(request, type=None):
         low_range=0
         upp_range=9999999
 
+
     c = {}
     c.update(csrf(request))
     
     if type==None:
-        a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
-        up = ""
+        if ord == "":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+            up = ""
+        if ord == "1":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('-price')  # @UndefinedVariable
+            up = ""
+        if ord == "2":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('price')  # @UndefinedVariable
+            up = ""
     else:
-        a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../../"
+        if ord == "":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+            up = "../../"
+        if ord == "1":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('-price')  # @UndefinedVariable
+            up = "../../"
+        if ord == "2":
+            a = Bows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('price')  # @UndefinedVariable
+            up = "../../"
     
     
     
@@ -40,7 +56,8 @@ def bows(request, type=None):
 def arrows(request, type=None):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
-    
+    ord = request.POST.get('ord', '')
+
     if low_range == "":
         low_range = 0
     if upp_range == "":
@@ -57,11 +74,25 @@ def arrows(request, type=None):
     c.update(csrf(request))
     
     if type==None:
-        a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
-        up = ""
+        if ord == "":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+            up = ""
+        if ord == "1":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('-price')  # @UndefinedVariable
+            up = ""
+        if ord == "2":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('price')  # @UndefinedVariable
+            up = ""
     else:
-        a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../../"
+        if ord == "":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+            up = "../../"
+        if ord == "1":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('-price')  # @UndefinedVariable
+            up = "../../"
+        if ord == "2":
+            a = Arrows.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('price')  # @UndefinedVariable
+            up = "../../"
         
     return render_to_response('products.html',
                              {'products':a,'up':up,'mod':'arrows','user':request.user},RequestContext(request,c))  # @UndefinedVariable
@@ -69,7 +100,8 @@ def arrows(request, type=None):
 def accessories(request, type=None):
     low_range = request.POST.get('1', '')
     upp_range = request.POST.get('2', '')
-    
+    ord = request.POST.get('ord', '')
+
     if low_range == "":
         low_range = 0
     if upp_range == "":
@@ -86,11 +118,25 @@ def accessories(request, type=None):
     c.update(csrf(request))
 
     if type==None:
-        a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
-        up = ""
+        if ord == "":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)))  # @UndefinedVariable
+            up = ""
+        if ord == "1":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('-price')  # @UndefinedVariable
+            up = ""
+        if ord == "2":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range))).order_by('price')  # @UndefinedVariable
+            up = ""
     else:
-        a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
-        up = "../../"
+        if ord == "":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type))  # @UndefinedVariable
+            up = "../../"
+        if ord == "1":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('-price')  # @UndefinedVariable
+            up = "../../"
+        if ord == "2":
+            a = Accessories.objects.filter(~Q(quantity = 0) & Q(price__range=(low_range,upp_range)) & Q(type=type)).order_by('price')  # @UndefinedVariable
+            up = "../../"
 
 
     return render_to_response('products.html',
