@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="../../static/css/price-range.css" rel="stylesheet">
+    <link href="../../static/css/animate.css" rel="stylesheet">
+	<link href="../../static/css/main.css" rel="stylesheet">
+	<link href="../../static/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.js"></script>
+    <script src="../../static/js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="../../static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../../static/images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../static/js/cart.js"></script>
+    <script type="text/javascript">
+<!--
+
+var bows = []
+var arrows = []
+var accessories = []
+
+{% for a in bow %}
+function bow_up{{a.id}}() {
+if (document.getElementById("bow_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	bows.push({{a.id}},[elem{{a.id}}.value])
+}
+else {
+    bows.push({{a.id}},[1])
+}
+
+}
+bow_up{{a.id}}()
+{% endfor %}
+
+{% for a in arrow %}
+function arrow_up{{a.id}}() {
+if (document.getElementById("arrow_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	arrows.push({{a.id}},[elem{{a.id}}.value])
+}
+else {
+    arrows.push({{a.id}},[1])
+}
+
+}
+arrow_up{{a.id}}()
+{% endfor %}
+
+{% for a in accessories %}
+function accessory_up{{a.id}}() {
+if (document.getElementById("accessory_{{a.id}}") != null) {
+    var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
+	elem{{a.id}}.value = parseInt(elem{{a.id}}.value) + 1;
+	accessories.push({{a.id}},[elem{{a.id}}.value])
+}
+else {
+    accessories.push({{a.id}},[1])
+}
+
+
+}
+accessory_up{{a.id}}()
+{% endfor %}
+
+
+
+
+{% for a in bow %}
+function bow_down{{a.id}}() {
+var elem{{a.id}} = document.getElementById("bow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+bows.push({{a.id}},[elem{{a.id}}.value])
+}
+{% endfor %}
+{% for a in arrow %}
+function arrow_down{{a.id}}() {
+var elem{{a.id}} = document.getElementById("arrow_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+arrows.push({{a.id}},[elem{{a.id}}.value])
+}
+{% endfor %}
+{% for a in accessories %}
+function accessory_down{{a.id}}() {
+
+var elem{{a.id}} = document.getElementById("accessory_{{a.id}}");
+elem{{a.id}}.value = parseInt(elem{{a.id}}.value) - 1;
+accessories.push({{a.id}},[elem{{a.id}}.value])
+}
+{% endfor %}
+
+function out() {
+var f = document.createElement("form");
+f.setAttribute('method',"post");
+f.setAttribute('action',"{% url 'checkout.views.out' %}");
+
+var i = document.createElement("input");
+i.type = "hidden";
+i.name = "1";
+i.id = "1";
+i.setAttribute('value',bows);
+f.appendChild(i);
+
+var ii = document.createElement("input");
+ii.type = "hidden";
+ii.name = "2";
+ii.id = "2";
+ii.setAttribute('value',arrows);
+f.appendChild(ii);
+
+var iii = document.createElement("input");
+iii.type = "hidden";
+iii.name = "3";
+iii.id = "3";
+iii.setAttribute('value',accessories);
+f.appendChild(iii);
+
+var us = document.createElement("input");
+us.type = "hidden";
+us.name = "4";
+us.id = "4";
+us.setAttribute('value',{{ user.id }});
+f.appendChild(us);
+
+
+document.body.appendChild(f);
+
+
+f.submit();
+}
+
+//-->
+</script>
+</head>
+</head><!--/head-->
+
+<body>
+
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> info@shoparchery.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href=""><i class="fa fa-facebook"></i></a></li>
+								<li><a href=""><i class="fa fa-twitter"></i></a></li>
+								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="{% url 'home.views.main' %}"><img src="../../static/images/home/logo.png" alt="" /></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								{% if user.username == "esad" %}
+								<li><a href="{% url 'checkout.views.review2' %}"><i class="fa fa-crosshairs"> Orders</i></a></li>
+								{% endif %}
+
+								<li><a href="{% url 'checkout.views.review' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{% url 'shopcart.views.show' %}" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								{% if user.is_authenticated %}
+								<li><a href="../../accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
+								{% else %}
+								<li><a href="../../accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'home.views.main' %}">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+										<li><a href="{% url 'checkout.views.review' %}">Checkout</a></li> 
+										<li><a href="{% url 'shopcart.views.show' %}" class="active">Cart</a></li> 
+                                    </ul>
+                                </li> 
+								
+								
+								<li><a href="{% url 'home.views.contact' %}">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					{% for a in bow %}
+
+					<tbody>
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
+						<tr>
+							<td class="cart_product">
+							
+						
+								<a href=""><img src="../../media/{{a.image}}" alt=""></a>
+							
+							</td>
+							<td class="cart_description">
+							<span class="input-group-btn">
+								<h4><a href="">{{a.name}}</a></h4>
+								<p>Type: {{ a.type }}</p>
+								</span>
+							</td>
+							<td class="cart_price">
+							<span class="input-group-btn">
+								<p>${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_quantity">
+							<span class="input-group-btn">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" onclick="bow_up{{a.id}}()" id="up" name="up"> + </a>
+									<input class="cart_quantity_input" type="text" id="bow_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="bow_down{{a.id}}()" id="down" > - </a>
+									</span>
+								</div>
+							</td>
+							<td class="cart_total">
+							<span class="input-group-btn">
+								<p class="cart_total_price">${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_delete">
+							<span class="input-group-btn">
+								<button type="submit" name="bow1" class="btn btn-warning">X</button>
+								</span>
+							
+							</td>
+						</tr>
+
+						</form>
+					</tbody>
+					{% endfor %}
+					{% for a in arrow %}
+
+					<tbody>
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
+						<tr>
+							<td class="cart_product">
+							
+						
+								<a href=""><img src="../../media/{{a.image}}" alt=""></a>
+							
+							</td>
+							<td class="cart_description">
+							<span class="input-group-btn">
+								<h4><a href="">{{a.name}}</a></h4>
+								<p>Type: {{ a.type }}</p>
+								</span>
+							</td>
+							<td class="cart_price">
+							<span class="input-group-btn">
+								<p>${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_quantity">
+							<span class="input-group-btn">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" onclick="arrow_up{{a.id}}()" id="up" > + </a>
+									<input class="cart_quantity_input" type="text" id="arrow_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="arrow_down{{a.id}}()" id="down" > - </a>
+									</span>
+								</div>
+							</td>
+							<td class="cart_total">
+							<span class="input-group-btn">
+								<p class="cart_total_price">${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_delete">
+							<span class="input-group-btn">
+								<button type="submit" name="arrow1" class="btn btn-warning">X</button>
+								</span>
+							
+							</td>
+						</tr>
+
+						</form>
+					</tbody>
+					{% endfor %}
+					{% for a in accessories %}
+
+					<tbody>
+					<form action="{% url 'shopcart.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="p_id" value="{{ a.id }}">
+					
+						<tr>
+							<td class="cart_product">
+							
+						
+								<a href=""><img src="../../media/{{a.image}}" alt=""></a>
+							
+							</td>
+							<td class="cart_description">
+							<span class="input-group-btn">
+								<h4><a href="">{{a.name}}</a></h4>
+								<p>Type: {{ a.type }}</p>
+								</span>
+							</td>
+							<td class="cart_price">
+							<span class="input-group-btn">
+								<p>${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_quantity">
+							<span class="input-group-btn">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" onclick="accessory_up{{a.id}}()" id="up"> + </a>
+									<input class="cart_quantity_input" type="text" id="accessory_{{a.id}}" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" onclick="accessory_down{{a.id}}()" id="down"> - </a>
+									</span>
+								</div>
+							</td>
+							<td class="cart_total">
+							<span class="input-group-btn">
+								<p class="cart_total_price">${{a.price}}</p>
+								</span>
+							</td>
+							<td class="cart_delete">
+							<span class="input-group-btn">
+								<button type="submit" name="accessory1" class="btn btn-warning">X</button>
+								</span>
+							
+							</td>
+						</tr>
+
+						</form>
+					</tbody>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li>
+								<input type="checkbox">
+								<label>Use Coupon Code</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Use Gift Voucher</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Estimate Shipping & Taxes</label>
+							</li>
+						</ul>
+						<ul class="user_info">
+							<li class="single_field">
+								<label>Country:</label>
+								<select>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+								
+							</li>
+							<li class="single_field">
+								<label>Region / State:</label>
+								<select>
+									<option>Select</option>
+									<option>Dhaka</option>
+									<option>London</option>
+									<option>Dillih</option>
+									<option>Lahore</option>
+									<option>Alaska</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+							
+							</li>
+							<li class="single_field zip-field">
+								<label>Zip Code:</label>
+								<input type="text">
+							</li>
+						</ul>
+						<a class="btn btn-default update" href="">Get Quotes</a>
+						<a class="btn btn-default check_out" href="">Continue</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" onclick="out()">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>Shop</span>-Archery</h2>
+							<p>It’s a sport everyone can share.</p>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="../../static/images/home/map.png" alt="" />
+							<p>Halaskargazi Cd No:208, Merkez Mh., Şişli, Turkey</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Online Help</a></li>
+								<li><a href="">Contact Us</a></li>
+								<li><a href="">Order Status</a></li>
+								<li><a href="">Change Location</a></li>
+								<li><a href="">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">T-Shirt</a></li>
+								<li><a href="">Mens</a></li>
+								<li><a href="">Womens</a></li>
+								<li><a href="">Gift Cards</a></li>
+								<li><a href="">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Terms of Use</a></li>
+								<li><a href="">Privecy Policy</a></li>
+								<li><a href="">Refund Policy</a></li>
+								<li><a href="">Billing System</a></li>
+								<li><a href="">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Company Information</a></li>
+								<li><a href="">Careers</a></li>
+								<li><a href="">Store Location</a></li>
+								<li><a href="">Affillate Program</a></li>
+								<li><a href="">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2014 SHOP-ARCHERY Inc. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+
+    <script src="../../static/js/jquery.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../../static/js/jquery.prettyPhoto.js"></script>
+    <script src="../../static/js/main.js"></script>
+</body>
+</html>

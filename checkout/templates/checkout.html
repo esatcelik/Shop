@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Checkout | E-Shopper</title>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="../../static/css/price-range.css" rel="stylesheet">
+    <link href="../../static/css/animate.css" rel="stylesheet">
+	<link href="../../static/css/main.css" rel="stylesheet">
+	<link href="../../static/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.js"></script>
+    <script src="../../static/js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="../../static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../../static/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> info@shoparchery.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href=""><i class="fa fa-facebook"></i></a></li>
+								<li><a href=""><i class="fa fa-twitter"></i></a></li>
+								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="{% url 'home.views.main' %}"><img src="../../static/images/home/logo.png" alt="" /></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								{% if user.username == "esad" %}
+								<li><a href="{% url 'checkout.views.review2' %}"><i class="fa fa-crosshairs"> Orders</i></a></li>
+								{% endif %}
+								
+								<li><a href="{% url 'checkout.views.review' %}" class="active"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{% url 'shopcart.views.show' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								{% if user.is_authenticated %}
+								<li><a href="../../accounts/logout"><i class="fa fa-lock">&nbsp;{{ user.username }}, logout</i></a></li>
+								{% else %}
+								<li><a href="../../accounts/login"><i class="fa fa-lock">&nbsp;login</i></a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="{% url 'home.views.main' %}">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+										<li><a href="{% url 'checkout.views.review' %}" class="active">Checkout</a></li> 
+										<li><a href="{% url 'shopcart.views.show' %}">Cart</a></li> 
+										 
+                                    </ul>
+                                </li> 
+					
+								<li><a href="{% url 'home.views.contact' %}">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Check out</li>
+				</ol>
+			</div><!--/breadcrums-->
+
+			<div class="review-payment">
+				<h2>Check out & Payment</h2>
+			</div>
+{% for a in data %}
+	
+	<form action="{% url 'checkout.views.delete' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="c_id" value="{{ a.real_id }}">
+					<input type="hidden" name="pac_id" value="{{ a.id }}">
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+						<td class="image"></td>
+							<td class="image">User</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+							<td class="">
+								<p class="cart_total_price">&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../static/images/home/truck.png" height="42" width="42" alt="" /></p>
+							</td>
+							
+							<td class="cart_product">
+								<p class="cart_total_price">{{user.username}}</p>
+							</td>
+							
+							
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									
+									<p class="cart_total_price">{{a.quantity}}</p>
+									
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">${{a.Tprice}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+							</td>
+							<td class="cart_delete">
+								<button type="submit" name="1" class="btn btn-warning">X</button>
+							</td>
+						</tr>
+
+						
+						</form>
+					</tbody>
+				</table>
+			</div>
+			
+			{% endfor %}
+			<div class="payment-options">
+					<span>
+						<label><input type="checkbox"> Direct Bank Transfer</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Check Payment</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Paypal</label>
+					</span>
+				</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	
+
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>Shop</span>-Archery</h2>
+							<p>It’s a sport everyone can share.</p>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="../../static/images/home/map.png" alt="" />
+							<p>Halaskargazi Cd No:208, Merkez Mh., Şişli, Turkey</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Online Help</a></li>
+								<li><a href="">Contact Us</a></li>
+								<li><a href="">Order Status</a></li>
+								<li><a href="">Change Location</a></li>
+								<li><a href="">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">T-Shirt</a></li>
+								<li><a href="">Mens</a></li>
+								<li><a href="">Womens</a></li>
+								<li><a href="">Gift Cards</a></li>
+								<li><a href="">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Terms of Use</a></li>
+								<li><a href="">Privecy Policy</a></li>
+								<li><a href="">Refund Policy</a></li>
+								<li><a href="">Billing System</a></li>
+								<li><a href="">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Company Information</a></li>
+								<li><a href="">Careers</a></li>
+								<li><a href="">Store Location</a></li>
+								<li><a href="">Affillate Program</a></li>
+								<li><a href="">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2014 SHOP-ARCHERY Inc. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+
+
+    <script src="../../static/js/jquery.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/jquery.scrollUp.min.js"></script>
+    <script src="../../static/js/jquery.prettyPhoto.js"></script>
+    <script src="../../static/js/main.js"></script>
+</body>
+</html>
